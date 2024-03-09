@@ -2669,12 +2669,7 @@ input, select, textarea {
 			transition: transform 0.2s ease-out;
 		}
 
-		a.image:hover img {
-			-moz-transform: scale(1.05);
-			-webkit-transform: scale(1.05);
-			-ms-transform: scale(1.05);
-			transform: scale(1.05);
-		}
+		
 
 /* Actions */
 
@@ -2919,9 +2914,6 @@ input, select, textarea {
 			position: relative;
 		}
 
-		header > p {
-			font-style: italic;
-		}
 
 		header > h1 + p {
 			font-size: 1.1rem;
@@ -2955,7 +2947,7 @@ input, select, textarea {
 
 			header.major > p {
 				margin-top: 0;
-				text-align: center;
+				text-align: justify;
 			}
 
 			header.major > .date {
