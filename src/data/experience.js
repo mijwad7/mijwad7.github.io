@@ -2,7 +2,7 @@ export const experiences = [
   {
     id: 1,
     role: 'Backend Developer',
-    company: 'SaasyWay',
+    company: 'SaasyWay, Remote',
     period: 'Aug 2025 – Present',
     type: 'Full-time',
     description:
@@ -29,7 +29,7 @@ export const experiences = [
   {
     id: 2,
     role: 'Full Stack Web Developer',
-    company: 'Amaanah Designs',
+    company: 'Amaanah Designs, Remote',
     period: 'Aug 2024 – Mar 2026',
     type: 'Part-time',
     description:

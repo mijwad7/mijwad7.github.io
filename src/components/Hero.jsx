@@ -215,9 +215,8 @@ export default function Hero() {
                   </>
                 ) : (
                   <>
-                    Building the kind of{' '}
-                    <span className="gradient-text">systems</span> I once only wanted to{' '}
-                    <span className="gradient-text">understand.</span>
+                    Building APIs, backends, and{' '}
+                    <span className="gradient-text">full-stack products</span> that hold together.
                   </>
                 )}
               </h1>
@@ -230,7 +229,7 @@ export default function Hero() {
               transition={{ delay: 0.35 }}
               className="text-white/50 text-base sm:text-lg leading-relaxed max-w-xl"
             >
-              I'm a full-stack developer focused on backend-heavy web applications, automation workflows, APIs, and real-time systems built with Django, React, PostgreSQL, Redis, and modern deployment tools.
+              I'm a full-stack developer working across Django, React, PostgreSQL, Redis, REST APIs, authentication, and real-time systems.
             </motion.p>
 
             {/* Supporting line */}
@@ -241,7 +240,7 @@ export default function Hero() {
                 transition={{ delay: 0.45 }}
                 className="text-white/30 text-sm leading-relaxed max-w-xl font-mono border-l-2 border-accent-cyan/30 pl-3"
               >
-                My portfolio is not a services page. It is a record of my journey, the projects I built, the systems I contributed to, and the engineering skills I'm developing every day.
+                Here you’ll find the projects, production contributions, and lessons that shaped how I think, build, debug, and grow as a developer.
               </motion.p>
             )}
 
