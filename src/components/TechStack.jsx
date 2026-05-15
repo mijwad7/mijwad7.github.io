@@ -78,8 +78,8 @@ function CapabilityCard({ card, index }) {
       <div>
         <div className="flex flex-wrap gap-1.5">
           {card.tools.map((tool, i) => (
-            <span 
-              key={i} 
+            <span
+              key={i}
               className={`px-2.5 py-1 rounded-lg text-xs border font-mono font-medium ${c.tag}`}
             >
               {tool}

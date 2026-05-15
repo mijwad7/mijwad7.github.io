@@ -35,11 +35,27 @@ export default function ProjectCard({ project, index, onClick }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, delay: index * 0.12 }}
-      className={`glass-card border ${c.border} ${c.glow} transition-all duration-300 hover:shadow-card-hover flex flex-col cursor-pointer group`}
+      className={`glass-card border ${c.border} ${c.glow} transition-all duration-300 hover:shadow-card-hover flex flex-col cursor-pointer group overflow-hidden`}
       onClick={() => onClick(project)}
     >
       {/* Top accent bar */}
       <div className={`h-0.5 w-full ${c.dot}`} style={{ background: `var(--color-${c.dot.replace('bg-', '')})` }} />
+
+      {/* Project Image Preview */}
+      {project.image && (
+        <div className="aspect-video w-full overflow-hidden relative border-b border-white/5 bg-white/[0.02]">
+          <img
+            src={project.image}
+            alt={project.name}
+            className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500 ease-out"
+            onError={(e) => {
+              e.target.style.opacity = 0; // Invisible placeholder if image hasn't been placed yet
+            }}
+          />
+          {/* Vignette Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/50 via-transparent to-transparent opacity-60" />
+        </div>
+      )}
 
       <div className="p-6 flex flex-col gap-4 flex-1">
         {/* Project header */}

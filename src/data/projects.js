@@ -19,6 +19,7 @@ export const projects = [
     github: 'https://github.com/mijwad7/elevateHub',
     demo: null,
     color: 'cyan',
+    image: '/projects/elevatehub.png',
     featured: true,
   },
   {
@@ -42,6 +43,7 @@ export const projects = [
     github: 'https://github.com/mijwad7/skill-sage',
     demo: 'https://www.loom.com/share/75beabb75d5e440a8177e88fcf3d7ff4',
     color: 'violet',
+    image: '/projects/skillsage.png',
     featured: true,
   },
   {
@@ -64,6 +66,7 @@ export const projects = [
     github: 'https://github.com/mijwad7/ecommerce_project',
     demo: null,
     color: 'emerald',
+    image: '/projects/shophive.png',
     featured: true,
   },
 ];

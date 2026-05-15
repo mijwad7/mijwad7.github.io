@@ -52,6 +52,20 @@ export default function ProjectDrawer({ project, onClose }) {
               </button>
             </div>
 
+            {/* Project Image Header */}
+            {project.image && (
+              <div className="w-full aspect-[2/1] overflow-hidden relative border-b border-white/5 bg-white/[0.02]">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full h-full object-cover object-center"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
+
             <div className="px-6 py-6 space-y-6">
               {/* Description */}
               <div>

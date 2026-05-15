@@ -2,60 +2,65 @@ export const capabilities = [
   {
     id: 1,
     category: 'Backend Development',
-    tools: ['Python', 'Django', 'Django REST Framework', 'FastAPI'],
-    useCase: 'Building scalable, secure REST APIs, managing authentication workflows, and designing server-side business logic.',
+    tools: ['Python', 'Django', 'DRF', 'FastAPI'],
+    useCase:
+      'I build backend APIs, authentication flows, business logic, admin features, and server-side systems that support real application behavior.',
     color: 'cyan',
   },
   {
     id: 2,
     category: 'Frontend Development',
-    tools: ['React', 'Redux', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'],
-    useCase: 'Developing highly responsive single-page applications, managing complex client-side state, and crafting interactive user interfaces.',
+    tools: ['React', 'Redux', 'JavaScript', 'Tailwind'],
+    useCase:
+      'I build responsive interfaces, dashboards, forms, and frontend flows that connect cleanly with backend APIs and user actions.',
     color: 'blue',
   },
   {
     id: 3,
-    category: 'Databases and Data Modeling',
-    tools: ['PostgreSQL', 'MongoDB', 'SQLite', 'Database Schema Design'],
-    useCase: 'Designing efficient data schemas, optimizing complex queries, and managing application data integrity and persistence layers.',
+    category: 'Databases & Data Modeling',
+    tools: ['PostgreSQL', 'MongoDB', 'SQLite', 'Schema Design'],
+    useCase:
+      'I design data structures for users, bookings, projects, content, and application state so features stay organized and reliable.',
     color: 'violet',
   },
   {
     id: 4,
-    category: 'External Integrations',
-    tools: ['REST APIs', 'Webhooks', 'Third-Party APIs', 'Postman', 'API Testing'],
-    useCase: 'Connecting applications with external platforms, testing API behavior, handling incoming webhook events, and moving data safely between systems.',
-    appliedIn: ['GHL automation', 'Jobber integration', 'Service portal', 'CRM setup systems'],
+    category: 'API Design & Integrations',
+    tools: ['REST APIs', 'Webhooks', 'Third-Party APIs', 'Postman'],
+    useCase:
+      'I connect applications with external platforms, test API behavior, handle webhook events, and move data safely between systems.',
     color: 'amber',
   },
   {
     id: 5,
-    category: 'Real-Time Systems',
+    category: 'Real-Time Features',
     tools: ['WebSockets', 'Django Channels', 'Redis', 'Live Updates'],
-    useCase: 'Building features where users need immediate updates, such as chat, live service request changes, real-time status updates, and event-driven UI behavior.',
-    appliedIn: ['ElevateHub', 'Service management portal', 'Booking systems'],
+    useCase:
+      'I build features where users need immediate updates, including chat, live status changes, service requests, and real-time UI behavior.',
     color: 'cyan',
   },
   {
     id: 6,
-    category: 'Automation & Background Processing',
-    tools: ['Background Jobs', 'Scheduled Tasks', 'Webhooks', 'Data Sync', 'Error Handling'],
-    useCase: 'Building backend processes that run behind the scenes, sync data, trigger follow-up actions, reduce manual work, and keep systems updated reliably.',
-    appliedIn: ['Marketing data automation', 'CRM setup workflows', 'Booking integrations'],
+    category: 'Automation & Background Tasks',
+    tools: ['Background Jobs', 'Scheduled Tasks', 'Data Sync', 'Celery'],
+    useCase:
+      'I build backend tasks that run behind the scenes, reduce manual work, sync data, trigger actions, and keep systems updated.',
     color: 'emerald',
   },
   {
     id: 7,
-    category: 'Deployment and Infrastructure',
-    tools: ['AWS (EC2/RDS)', 'NGINX', 'Gunicorn', 'Vercel', 'Railway'],
-    useCase: 'Deploying production servers, configuring secure reverse proxies, managing hosting, and setting up robust deployment architectures.',
+    category: 'Deployment & Production Setup',
+    tools: ['AWS EC2/RDS', 'NGINX', 'Gunicorn', 'Vercel'],
+    useCase:
+      'I deploy applications, configure servers, connect databases, manage hosting, and debug environment-related production issues.',
     color: 'violet',
   },
   {
     id: 8,
-    category: 'Development Tools',
-    tools: ['Git', 'GitHub', 'Linux / WSL', 'Figma', 'Cursor / VS Code'],
-    useCase: 'Controlling code versions, maintaining development workflows, translating UI/UX mockups, and scripting local automation systems.',
+    category: 'Core Fundamentals',
+    tools: ['DSA', 'Debugging', 'Problem Solving', 'System Design'],
+    useCase:
+      'I use fundamentals to reason through bugs, edge cases, data flow, performance, and implementation decisions before writing code.',
     color: 'blue',
-  }
+  },
 ];
