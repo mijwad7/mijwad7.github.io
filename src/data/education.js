@@ -3,7 +3,7 @@ export const educationItems = [
     id: 1,
     title: 'Web Development using Python, Django, and React',
     institution: 'Brototype',
-    period: '2024 – Present',
+    period: '2024 – 2025',
     type: 'training',
     description:
       'Project-based web development training focused on practical full-stack application development, real-world projects, mentorship, debugging, deployment, and production-style workflows.',

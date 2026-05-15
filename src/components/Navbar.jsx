@@ -27,7 +27,14 @@ export default function Navbar() {
   const handleNav = (href) => {
     setMobileOpen(false);
     const id = href.replace('#', '');
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        const yOffset = -80; // Standard fixed header height offset
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 150); // Defer by 150ms to allow mobile panel transition to complete
   };
 
   return (

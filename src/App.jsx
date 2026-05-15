@@ -7,7 +7,6 @@ import ProductionSystems from './components/ProductionSystems';
 import PersonalProjects from './components/PersonalProjects';
 import EarlierProjects from './components/EarlierProjects';
 import TechStack from './components/TechStack';
-import EngineeringNotes from './components/EngineeringNotes';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -51,8 +50,6 @@ export default function App() {
         <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
         <TechStack />
 
-        <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
-        <EngineeringNotes />
 
         <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
         <Education />
