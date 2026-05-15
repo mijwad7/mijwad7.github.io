@@ -4,121 +4,156 @@ import { Code2, Download, ArrowRight, MapPin, ChevronRight } from 'lucide-react'
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { links } from '../data/links';
 
-const terminalLines = [
-  { prompt: '>', cmd: 'whoami', output: 'Muhammed Mijwad', delay: 0 },
-  { prompt: '>', cmd: 'location', output: 'Bahrain', delay: 0.4 },
-  { prompt: '>', cmd: 'current_focus', output: 'Backend systems, APIs, automation, real-time workflows, AI-assisted tools', delay: 0.8 },
-  { prompt: '>', cmd: 'stack', output: 'Django, React, PostgreSQL, Redis, AWS, DRF', delay: 1.2 },
-];
+const COMMANDS = {
+  journey: {
+    output: 'Redirecting to Developer Journey timeline...',
+    href: '#journey',
+  },
+  projects: {
+    output: 'Opening main projects showcase...',
+    href: '#projects',
+  },
+  stack: {
+    output: 'Initializing core technical skill mapping...',
+    href: '#stack',
+  },
+  experience: {
+    output: 'Accessing professional work history...',
+    href: '#experience',
+  },
+  contact: {
+    output: 'Opening contact information portal...',
+    href: '#contact',
+  },
+  whoami: {
+    output: 'Muhammed Mijwad — Full Stack Developer based in Bahrain.',
+  },
+  help: {
+    output: 'Available commands: journey, projects, stack, experience, contact, whoami, clear',
+  },
+};
 
-const milestones = [
-  { year: '2023', text: 'Discovered web development' },
-  { year: '2024', text: 'Built full-stack projects while working part-time' },
-  { year: '2025', text: 'Joined SaasyWay as Backend Developer' },
-  { year: 'Now', text: 'Growing into backend-heavy product engineering' },
-];
+function InteractiveTerminal() {
+  const [input, setInput] = useState('');
+  const [history, setHistory] = useState([
+    { type: 'output', content: 'System initialized. Type "help" to view commands.' },
+  ]);
 
-const commandSuggestions = [
-  { cmd: 'view journey', href: '#journey' },
-  { cmd: 'open production systems', href: '#production' },
-  { cmd: 'open projects', href: '#projects' },
-  { cmd: 'inspect backend experience', href: '#experience' },
-  { cmd: 'see skill map', href: '#stack' },
-  { cmd: 'contact developer', href: '#contact' },
-];
+  const executeCommand = (rawCmd) => {
+    const cmd = rawCmd.trim().toLowerCase();
+    if (!cmd) return;
 
-function TerminalCard() {
-  const [visibleLines, setVisibleLines] = useState(0);
+    const newHistory = [...history, { type: 'input', content: rawCmd }];
 
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      i++;
-      setVisibleLines(i);
-      if (i >= terminalLines.length) clearInterval(interval);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+    if (cmd === 'clear') {
+      setHistory([{ type: 'output', content: 'Terminal history cleared.' }]);
+      return;
+    }
 
-  return (
-    <div className="glass-card p-5 font-mono text-sm">
-      {/* Terminal header */}
-      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
-        <div className="w-3 h-3 rounded-full bg-red-500/70" />
-        <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-        <div className="w-3 h-3 rounded-full bg-green-500/70" />
-        <span className="ml-2 text-white/30 text-xs">terminal — developer@portfolio</span>
-      </div>
+    const response = COMMANDS[cmd];
 
-      {/* Lines */}
-      <div className="space-y-3">
-        {terminalLines.map((line, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: -10 }}
-            animate={i < visibleLines ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-accent-cyan/60">{line.prompt}</span>
-              <span className="text-white/70">{line.cmd}</span>
-            </div>
-            <div className="text-white/40 pl-4 text-xs mt-0.5 leading-relaxed">{line.output}</div>
-          </motion.div>
-        ))}
-        {visibleLines >= terminalLines.length && (
-          <div className="flex items-center gap-2 pt-1">
-            <span className="text-accent-cyan/60">{'>'}</span>
-            <span className="w-2 h-4 bg-accent-cyan/70 animate-cursor-blink inline-block" />
-          </div>
-        )}
-      </div>
+    if (response) {
+      newHistory.push({ type: 'output', content: response.output });
+      
+      // If command corresponds to navigation, scroll after a tiny delay
+      if (response.href) {
+        const targetId = response.href.replace('#', '');
+        setTimeout(() => {
+          const el = document.getElementById(targetId);
+          if (el) {
+            const yOffset = -80;
+            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 600);
+      }
+    } else {
+      newHistory.push({
+        type: 'error',
+        content: `Command not recognized: "${cmd}". Type "help" for list of commands.`,
+      });
+    }
 
-      {/* Milestones */}
-      <div className="mt-5 pt-4 border-t border-white/5 space-y-2">
-        <div className="text-white/30 text-xs mb-3">// milestones</div>
-        {milestones.map((m, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2 + i * 0.15 }}
-            className="flex items-start gap-3"
-          >
-            <span className="text-accent-cyan/50 text-xs shrink-0 w-10">{m.year}</span>
-            <span className="text-white/40 text-xs leading-relaxed">{m.text}</span>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
+    setHistory(newHistory);
+  };
 
-function CommandPalette() {
-  const handleClick = (href) => {
-    const id = href.replace('#', '');
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    executeCommand(input);
+    setInput('');
   };
 
   return (
-    <div className="glass-card p-4 mt-4">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-white/30 text-xs font-mono">// quick navigation</span>
+    <div 
+      className="glass-card p-5 font-mono text-sm flex flex-col h-[380px] relative"
+      onClick={() => document.getElementById('terminal-input')?.focus()}
+    >
+      {/* Terminal Header */}
+      <div className="flex items-center gap-2 mb-3 pb-3 border-b border-white/5 shrink-0 cursor-default">
+        <div className="w-3 h-3 rounded-full bg-red-500/70" />
+        <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+        <div className="w-3 h-3 rounded-full bg-green-500/70" />
+        <span className="ml-2 text-white/30 text-xs flex-1">interactive-shell — zsh</span>
+        <span className="text-[10px] text-accent-cyan/60 border border-accent-cyan/20 px-1.5 py-0.5 rounded animate-pulse">
+          LIVE
+        </span>
       </div>
-      <div className="grid grid-cols-2 gap-1.5">
-        {commandSuggestions.map((s, i) => (
-          <motion.button
-            key={i}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 + i * 0.08 }}
-            onClick={() => handleClick(s.href)}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-mono text-white/40 hover:text-accent-cyan hover:bg-accent-cyan/5 transition-all text-left border border-transparent hover:border-accent-cyan/10"
-          >
-            <ChevronRight size={10} className="shrink-0" />
-            {s.cmd}
-          </motion.button>
+
+      {/* Scrollable History Output */}
+      <div className="flex-1 overflow-y-auto mb-4 space-y-2.5 pr-1 custom-scrollbar">
+        {history.map((line, i) => (
+          <div key={i} className="leading-relaxed">
+            {line.type === 'input' ? (
+              <div className="flex items-center gap-2">
+                <span className="text-accent-cyan/70 font-bold">{'>'}</span>
+                <span className="text-white/90">{line.content}</span>
+              </div>
+            ) : line.type === 'error' ? (
+              <div className="text-red-400/80 pl-4 text-xs">{line.content}</div>
+            ) : (
+              <div className="text-white/45 pl-4 text-xs">{line.content}</div>
+            )}
+          </div>
         ))}
+        
+        {/* Form Input Line */}
+        <form onSubmit={handleSubmit} className="flex items-center gap-2 pt-1">
+          <label htmlFor="terminal-input" className="text-accent-cyan/70 font-bold">{'>'}</label>
+          <div className="relative flex-1">
+            <input
+              id="terminal-input"
+              type="text"
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck="false"
+              className="w-full bg-transparent border-none outline-none text-white/90 p-0 caret-accent-cyan focus:ring-0"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder='Try "journey" or type command...'
+            />
+          </div>
+        </form>
+      </div>
+
+      {/* Quick Nav Buttons (Terminal Footer) */}
+      <div className="pt-3 border-t border-white/5 shrink-0">
+        <div className="text-white/20 text-[10px] uppercase tracking-widest mb-2 font-bold cursor-default">
+          // Quick execution shortcuts
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {['journey', 'projects', 'stack', 'experience', 'contact'].map((cmd) => (
+            <button
+              key={cmd}
+              onClick={(e) => {
+                e.stopPropagation();
+                executeCommand(cmd);
+              }}
+              className="px-2 py-1 rounded bg-white/4 border border-white/8 hover:border-accent-cyan/30 hover:bg-accent-cyan/5 text-xs font-mono text-white/40 hover:text-accent-cyan transition-all"
+            >
+              {cmd}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -204,13 +239,27 @@ export default function Hero() {
               className="flex flex-wrap gap-3"
             >
               <button
-                onClick={() => document.getElementById('production')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  const el = document.getElementById('production');
+                  if (el) {
+                    const yOffset = -80;
+                    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
                 className="btn-primary"
               >
                 View My Work <ArrowRight size={14} />
               </button>
               <button
-                onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  const el = document.getElementById('journey');
+                  if (el) {
+                    const yOffset = -80;
+                    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
                 className="btn-secondary"
               >
                 Explore My Journey
@@ -239,15 +288,14 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: terminal + command palette */}
+          {/* Right: interactive terminal */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
             className="flex flex-col"
           >
-            <TerminalCard />
-            <CommandPalette />
+            <InteractiveTerminal />
           </motion.div>
         </div>
       </div>
