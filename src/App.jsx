@@ -12,11 +12,16 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollProgressTimeline from './components/ScrollProgressTimeline';
 
+import { useMode } from './context/ModeContext';
+
 export default function App() {
+  const { mode } = useMode();
+  const isResume = mode === 'resume';
+
   return (
     <div className="min-h-screen bg-surface text-white">
       <Navbar />
-      <ScrollProgressTimeline />
+      {!isResume && <ScrollProgressTimeline />}
 
       <main>
         {/* Subtle top gradient */}
@@ -28,12 +33,15 @@ export default function App() {
 
         <Hero />
 
-        {/* Section dividers */}
         <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
         <CurrentFocus />
 
-        <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
-        <JourneyTimeline />
+        {!isResume && (
+          <>
+            <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
+            <JourneyTimeline />
+          </>
+        )}
 
         <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
         <Experience />
@@ -44,12 +52,15 @@ export default function App() {
         <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
         <PersonalProjects />
 
-        <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
-        <EarlierProjects />
+        {!isResume && (
+          <>
+            <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
+            <EarlierProjects />
+          </>
+        )}
 
         <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
         <TechStack />
-
 
         <div className="section-divider mx-8 sm:mx-16 lg:mx-32" aria-hidden="true" />
         <Education />

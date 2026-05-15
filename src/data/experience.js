@@ -43,7 +43,12 @@ export const experiences = [
       'Deployment and debugging',
       'Client project maintenance',
     ],
-    bullets: [],
+    bullets: [
+      'Designed and developed custom web applications using Django and PostgreSQL for client projects.',
+      'Built responsive user interfaces using React and JavaScript, ensuring seamless user experience across mobile and desktop.',
+      'Implemented robust user authentication workflows and data handling logic for end-to-end security.',
+      'Maintained client projects, troubleshooting issues and deploying iterative updates to live systems.',
+    ],
     color: 'violet',
   },
 ];

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { links } from '../data/links';
+import { useMode } from '../context/ModeContext';
 
 const navItems = [
   { label: 'Focus', href: '#current-focus' },
@@ -17,6 +18,7 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { mode, toggleMode } = useMode();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -73,6 +75,19 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-2">
+            {/* Mode Toggle */}
+            <button
+              onClick={toggleMode}
+              className="mr-3 flex items-center bg-white/5 border border-white/10 rounded-full p-1 w-[120px] relative cursor-pointer hover:bg-white/10 transition-colors"
+              aria-label="Toggle Resume Mode"
+            >
+              <div 
+                className={`absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-accent-cyan/20 border border-accent-cyan/40 transition-transform duration-300 ${mode === 'resume' ? 'translate-x-full' : 'translate-x-0'}`}
+              />
+              <span className={`flex-1 text-center text-[10px] font-mono font-medium z-10 transition-colors ${mode === 'story' ? 'text-accent-cyan' : 'text-white/40'}`}>Story</span>
+              <span className={`flex-1 text-center text-[10px] font-mono font-medium z-10 transition-colors ${mode === 'resume' ? 'text-accent-cyan' : 'text-white/40'}`}>Resume</span>
+            </button>
+
             <a
               href={links.github}
               target="_blank"
@@ -133,7 +148,19 @@ export default function Navbar() {
                   {label}
                 </button>
               ))}
-              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5 flex-wrap">
+                <div className="w-full mb-2 flex justify-center">
+                  <button
+                    onClick={toggleMode}
+                    className="flex items-center bg-white/5 border border-white/10 rounded-full p-1 w-[140px] relative cursor-pointer"
+                  >
+                    <div 
+                      className={`absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-accent-cyan/20 border border-accent-cyan/40 transition-transform duration-300 ${mode === 'resume' ? 'translate-x-full' : 'translate-x-0'}`}
+                    />
+                    <span className={`flex-1 text-center text-[10px] font-mono z-10 ${mode === 'story' ? 'text-accent-cyan' : 'text-white/40'}`}>Story Mode</span>
+                    <span className={`flex-1 text-center text-[10px] font-mono z-10 ${mode === 'resume' ? 'text-accent-cyan' : 'text-white/40'}`}>Resume</span>
+                  </button>
+                </div>
                 <a href={links.github} target="_blank" rel="noreferrer" className="btn-secondary text-xs flex-1 justify-center">
                   <FaGithub size={13} /> GitHub
                 </a>

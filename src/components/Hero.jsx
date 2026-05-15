@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Code2, Download, ArrowRight, MapPin, ChevronRight } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { links } from '../data/links';
+import { useMode } from '../context/ModeContext';
 
 const COMMANDS = {
   journey: {
@@ -160,6 +161,9 @@ function InteractiveTerminal() {
 }
 
 export default function Hero() {
+  const { mode } = useMode();
+  const isResume = mode === 'resume';
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
       {/* Background gradient blobs */}
@@ -205,9 +209,17 @@ export default function Hero() {
             >
               <p className="text-white/40 font-mono text-sm mb-2 tracking-wider">Muhammed Mijwad</p>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight text-white">
-                Building the kind of{' '}
-                <span className="gradient-text">systems</span> I once only wanted to{' '}
-                <span className="gradient-text">understand.</span>
+                {isResume ? (
+                  <>
+                    Full Stack <span className="gradient-text">Developer</span>
+                  </>
+                ) : (
+                  <>
+                    Building the kind of{' '}
+                    <span className="gradient-text">systems</span> I once only wanted to{' '}
+                    <span className="gradient-text">understand.</span>
+                  </>
+                )}
               </h1>
             </motion.div>
 
@@ -222,14 +234,16 @@ export default function Hero() {
             </motion.p>
 
             {/* Supporting line */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 }}
-              className="text-white/30 text-sm leading-relaxed max-w-xl font-mono border-l-2 border-accent-cyan/30 pl-3"
-            >
-              My portfolio is not a services page. It is a record of my journey, the projects I built, the systems I contributed to, and the engineering skills I'm developing every day.
-            </motion.p>
+            {!isResume && (
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45 }}
+                className="text-white/30 text-sm leading-relaxed max-w-xl font-mono border-l-2 border-accent-cyan/30 pl-3"
+              >
+                My portfolio is not a services page. It is a record of my journey, the projects I built, the systems I contributed to, and the engineering skills I'm developing every day.
+              </motion.p>
+            )}
 
             {/* CTAs */}
             <motion.div
@@ -251,19 +265,21 @@ export default function Hero() {
               >
                 View My Work <ArrowRight size={14} />
               </button>
-              <button
-                onClick={() => {
-                  const el = document.getElementById('journey');
-                  if (el) {
-                    const yOffset = -80;
-                    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
-                  }
-                }}
-                className="btn-secondary"
-              >
-                Explore My Journey
-              </button>
+              {!isResume && (
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('journey');
+                    if (el) {
+                      const yOffset = -80;
+                      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                      window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                  }}
+                  className="btn-secondary"
+                >
+                  Explore My Journey
+                </button>
+              )}
             </motion.div>
 
             {/* Icon links */}
@@ -288,15 +304,44 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: interactive terminal */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-col"
-          >
-            <InteractiveTerminal />
-          </motion.div>
+          {/* Right: interactive terminal or resume summary */}
+          {!isResume ? (
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="flex flex-col"
+            >
+              <InteractiveTerminal />
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="glass-card p-8 flex flex-col justify-center h-full border border-accent-cyan/20 bg-accent-cyan/5"
+            >
+              <h3 className="text-xl font-bold text-white mb-4">Core Competencies</h3>
+              <ul className="space-y-3 text-white/70 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-accent-cyan mt-1">▹</span>
+                  <span><strong>Backend Engineering:</strong> Designing RESTful APIs, database modeling, and scalable architecture using Django and Node.js.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent-cyan mt-1">▹</span>
+                  <span><strong>Frontend Development:</strong> Building responsive, interactive web applications with React, Vite, and modern CSS frameworks.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent-cyan mt-1">▹</span>
+                  <span><strong>Infrastructure & Ops:</strong> Deploying robust applications using AWS (EC2, S3), Redis, PostgreSQL, and Nginx.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-accent-cyan mt-1">▹</span>
+                  <span><strong>Data & Real-time:</strong> Implementing WebSocket connections, background tasks (Celery), and complex data pipelines.</span>
+                </li>
+              </ul>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

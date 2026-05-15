@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 import { skillGroups, skillPaths } from '../data/skills';
+import { useMode } from '../context/ModeContext';
 
 const colorMap = {
   cyan: {
@@ -74,24 +75,29 @@ function SkillPath({ path, index }) {
 }
 
 export default function TechStack() {
+  const { mode } = useMode();
+  const isResume = mode === 'resume';
+
   return (
     <section id="stack" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           label="Technical Stack"
-          title="The tools I use to build"
-          subtitle="Not just a logo wall — a map of how my skills connect and build on each other."
+          title={isResume ? 'Core Technologies' : 'The tools I use to build'}
+          subtitle={!isResume ? "Not just a logo wall — a map of how my skills connect and build on each other." : ""}
         />
 
         {/* Skill paths */}
-        <div className="mb-12">
-          <p className="text-white/30 text-xs font-mono uppercase tracking-widest mb-4">Skill paths</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {skillPaths.map((path, i) => (
-              <SkillPath key={path.id} path={path} index={i} />
-            ))}
+        {!isResume && (
+          <div className="mb-12">
+            <p className="text-white/30 text-xs font-mono uppercase tracking-widest mb-4">Skill paths</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {skillPaths.map((path, i) => (
+                <SkillPath key={path.id} path={path} index={i} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Skill groups */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
