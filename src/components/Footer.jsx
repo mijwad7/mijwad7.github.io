@@ -10,9 +10,6 @@ export default function Footer() {
           <p className="text-white/40 text-sm">
             Muhammed Mijwad — Full Stack Developer based in Bahrain.
           </p>
-          <p className="text-white/20 text-xs mt-1 font-mono">
-            Built with React, Vite, Tailwind CSS, and Framer Motion.
-          </p>
         </div>
         <div className="flex items-center gap-3">
           {[
