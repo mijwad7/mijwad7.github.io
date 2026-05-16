@@ -57,10 +57,10 @@ export const earlierProjects = [
   },
   {
     id: 8,
-    name: 'Movies Galore',
-    description: 'A React movie search app that uses the OMDB API to search and display movies, TV shows, and games.',
-    tech: ['HTML', 'CSS', 'JavaScript', 'React', 'OMDB API'],
-    github: 'https://github.com/mijwad7/movies-galore',
-    demo: 'https://youtu.be/pJZbXW_O4m8',
+    name: 'PreciousPals',
+    description: 'A friendship management tool for securely organizing contacts, featuring user authentication, personal profiles, and CRUD operations for friend lists.',
+    tech: ['Python', 'Flask', 'SQLAlchemy', 'SQLite', 'Flask-Login', 'HTML', 'CSS'],
+    github: 'https://github.com/mijwad7/precious-pals',
+    demo: 'https://youtu.be/_kztYwIAhkw',
   },
 ];
