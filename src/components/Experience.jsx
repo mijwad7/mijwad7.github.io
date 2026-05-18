@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, CheckCircle } from 'lucide-react';
 import SectionHeader from './SectionHeader';
@@ -12,16 +13,44 @@ const colorMap = {
 export default function Experience() {
   const { mode } = useMode();
   const isResume = mode === 'resume';
+  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const scrollLeft = container.scrollLeft;
+    
+    const cardWidth = container.children[0]?.clientWidth || 300;
+    const gap = 24; // gap-6 is 24px
+    const index = Math.round(scrollLeft / (cardWidth + gap));
+    setActiveIndex(Math.max(0, Math.min(index, experiences.length - 1)));
+  };
+
+  const scrollToSlide = (idx) => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const cardWidth = container.children[0]?.clientWidth || 300;
+    const gap = 24;
+    container.scrollTo({
+      left: idx * (cardWidth + gap),
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <SectionHeader label="Experience" title={isResume ? 'Professional Experience' : "Where I've applied my skills"} />
 
-        <div className={isResume 
-          ? "grid gap-6 grid-cols-1 max-w-4xl mx-auto" 
-          : "flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 lg:grid lg:grid-cols-2 no-scrollbar items-stretch"
-        }>
+        <div
+          ref={containerRef}
+          onScroll={handleScroll}
+          className={isResume 
+            ? "grid gap-6 grid-cols-1 max-w-4xl mx-auto" 
+            : "flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 lg:grid lg:grid-cols-2 no-scrollbar items-stretch"
+          }
+        >
           {experiences.map((exp, i) => {
             const c = colorMap[exp.color] || colorMap.cyan;
             return (
@@ -97,6 +126,24 @@ export default function Experience() {
             );
           })}
         </div>
+
+        {/* Dynamic Mobile Dots Indicator */}
+        {!isResume && (
+          <div className="flex md:hidden justify-center items-center gap-2 mt-4">
+            {experiences.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollToSlide(idx)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activeIndex === idx 
+                    ? 'w-6 bg-accent-cyan' 
+                    : 'w-1.5 bg-white/20'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

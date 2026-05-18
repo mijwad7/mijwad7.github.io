@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Database, ShieldCheck, Cpu, Share2, Network, Terminal, Globe } from 'lucide-react';
 import SectionHeader from './SectionHeader';
@@ -103,6 +104,31 @@ function CapabilityCard({ card, index }) {
 }
 
 export default function TechStack() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const scrollLeft = container.scrollLeft;
+    
+    const cardWidth = container.children[0]?.clientWidth || 300;
+    const gap = 24; // gap-6
+    const index = Math.round(scrollLeft / (cardWidth + gap));
+    setActiveIndex(Math.max(0, Math.min(index, capabilities.length - 1)));
+  };
+
+  const scrollToSlide = (idx) => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const cardWidth = container.children[0]?.clientWidth || 300;
+    const gap = 24;
+    container.scrollTo({
+      left: idx * (cardWidth + gap),
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section id="stack" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -112,11 +138,31 @@ export default function TechStack() {
           subtitle="A practical view of the tools I use, what I use them for, and where they show up across projects, client work, and production systems."
         />
 
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 mt-12 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 no-scrollbar items-stretch">
+        <div
+          ref={containerRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 mt-12 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 no-scrollbar items-stretch"
+        >
           {capabilities.map((card, i) => (
             <div key={card.id} className="w-[80vw] sm:w-[300px] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none flex">
               <CapabilityCard card={card} index={i} />
             </div>
+          ))}
+        </div>
+
+        {/* Dynamic Mobile Dots Indicator */}
+        <div className="flex md:hidden justify-center items-center gap-2 mt-4">
+          {capabilities.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => scrollToSlide(idx)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                activeIndex === idx 
+                  ? 'w-6 bg-accent-cyan' 
+                  : 'w-1.5 bg-white/20'
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
           ))}
         </div>
       </div>
