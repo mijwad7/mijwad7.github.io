@@ -12,9 +12,11 @@ export default function ProductionSystems() {
           subtitle="Some professional work cannot be shown publicly as full source code, but these are real systems and workflows I contributed to as part of production development work. This section focuses on the type of systems I worked on, the technical problems involved, and the parts I personally contributed to."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 no-scrollbar items-stretch">
           {productionSystems.map((system, i) => (
-            <ProductionSystemCard key={system.id} system={system} index={i} />
+            <div key={system.id} className="w-[85vw] sm:w-[350px] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none flex">
+              <ProductionSystemCard system={system} index={i} />
+            </div>
           ))}
         </div>
       </div>

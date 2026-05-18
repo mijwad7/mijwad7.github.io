@@ -52,7 +52,7 @@ export default function ProductionSystemCard({ system, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.45, delay: (index % 3) * 0.1 }}
-      className={`glass-card flex flex-col border ${c.border} overflow-hidden`}
+      className={`glass-card flex flex-col border ${c.border} overflow-hidden w-full h-full`}
     >
       {/* Card header */}
       <div className="p-5 flex flex-col gap-4">

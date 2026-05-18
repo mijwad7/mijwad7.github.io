@@ -23,20 +23,20 @@ export default function EarlierProjects() {
           subtitle="Before working on larger full-stack and production systems, I built smaller projects that helped me practice core web development concepts: authentication, CRUD workflows, APIs, state, routing, search, forms, and user interaction."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 no-scrollbar items-stretch">
           {earlierProjects.map((project, i) => {
             const isExpanded = expandedProjects.includes(project.id);
             const displayedTech = isExpanded ? project.tech : project.tech.slice(0, 3);
 
             return (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.35, delay: (i % 4) * 0.07 }}
-                className="glass-card-hover p-4 flex flex-col gap-3 h-full"
-              >
+              <div key={project.id} className="w-[80vw] sm:w-auto shrink-0 snap-center sm:shrink sm:snap-align-none flex">
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.35, delay: (i % 4) * 0.07 }}
+                  className="glass-card-hover p-4 flex flex-col gap-3 w-full h-full"
+                >
                 <div>
                   <h3 className="font-semibold text-white text-sm">{project.name}</h3>
                   <p className="text-white/40 text-xs mt-1.5 leading-relaxed">
@@ -100,8 +100,9 @@ export default function EarlierProjects() {
                   )}
                 </div>
               </motion.div>
-            );
-          })}
+            </div>
+          );
+        })}
         </div>
       </div>
     </section>

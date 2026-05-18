@@ -16,14 +16,15 @@ export default function PersonalProjects() {
           subtitle="These projects helped me move from learning concepts to building complete applications. Each one pushed me into a different part of web development: authentication, real-time communication, API design, database modeling, deployment, AI integration, and user-facing product flows."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 no-scrollbar items-stretch">
           {projects.map((project, i) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={i}
-              onClick={setSelected}
-            />
+            <div key={project.id} className="w-[85vw] sm:w-[380px] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none flex">
+              <ProjectCard
+                project={project}
+                index={i}
+                onClick={setSelected}
+              />
+            </div>
           ))}
         </div>
       </div>

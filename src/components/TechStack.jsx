@@ -60,7 +60,7 @@ function CapabilityCard({ card, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className={`glass-card p-6 border flex flex-col h-full gap-5 hover:shadow-lg hover:bg-white/[0.02] transition-all group ${c.border}`}
+      className={`glass-card p-6 border flex flex-col w-full h-full gap-5 hover:shadow-lg hover:bg-white/[0.02] transition-all group ${c.border}`}
     >
       {/* Card Header */}
       <div className="flex items-start gap-4">
@@ -112,9 +112,11 @@ export default function TechStack() {
           subtitle="A practical view of the tools I use, what I use them for, and where they show up across projects, client work, and production systems."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 mt-12 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 no-scrollbar items-stretch">
           {capabilities.map((card, i) => (
-            <CapabilityCard key={card.id} card={card} index={i} />
+            <div key={card.id} className="w-[80vw] sm:w-[300px] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none flex">
+              <CapabilityCard card={card} index={i} />
+            </div>
           ))}
         </div>
       </div>

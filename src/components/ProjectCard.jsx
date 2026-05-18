@@ -35,7 +35,7 @@ export default function ProjectCard({ project, index, onClick }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, delay: index * 0.12 }}
-      className={`glass-card border ${c.border} ${c.glow} transition-all duration-300 hover:shadow-card-hover flex flex-col cursor-pointer group overflow-hidden`}
+      className={`glass-card border ${c.border} ${c.glow} transition-all duration-300 hover:shadow-card-hover flex flex-col cursor-pointer group overflow-hidden w-full h-full`}
       onClick={() => onClick(project)}
     >
       {/* Top accent bar */}
