@@ -57,10 +57,10 @@ export const capabilities = [
   },
   {
     id: 8,
-    category: 'Core Fundamentals',
-    tools: ['DSA', 'Debugging', 'Problem Solving', 'System Design'],
+    category: 'AI & LLM',
+    tools: ['OpenAI', 'Gemini AI', 'LLM APIs', 'AI Agents'],
     useCase:
-      'I use fundamentals to reason through bugs, edge cases, data flow, performance, and implementation decisions before writing code.',
-    color: 'blue',
+      'I use LLM APIs in the products I build, so AI features work with the backend, data, and interface instead of living on their own.',
+    color: 'emerald',
   },
 ];

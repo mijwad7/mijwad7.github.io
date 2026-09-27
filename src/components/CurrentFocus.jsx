@@ -4,9 +4,9 @@ const improvements = [
   'Designing APIs that are clear, consistent, and easier to extend',
   'Modeling data around real business rules, not just database tables',
   'Building secure user flows across frontend and backend',
-  'Handling real-time state changes, conflicts, and race conditions',
+  'Using LLMs inside real features, next to the APIs and data they depend on',
   'Debugging production issues across backend logic, integrations, and deployments',
-  'Refactoring existing systems without breaking current behavior',
+  'Choosing when an LLM belongs in a feature, and when regular code is the better tool',
 ];
 
 export default function CurrentFocus() {
@@ -38,12 +38,13 @@ export default function CurrentFocus() {
               <p>
                 I’m past the stage of only building projects to learn syntax. Now I’m learning how real
                 systems behave: how APIs age, how data models affect features, how integrations fail,
-                how race conditions appear, and how small backend decisions can shape the whole product.
+                and how AI belongs inside a reliable product instead of sitting off to the side.
               </p>
               <p>
                 At SaasyWay, I’m getting practical exposure to production backend systems, booking
-                logic, service portals, external integrations and debugging
-                issues that only show up when real users and real business rules are involved.
+                logic, service portals, external integrations, and AI features that have to work with
+                the rest of the system, plus debugging issues that only show up when real users and
+                real business rules are involved.
               </p>
             </div>
           </motion.div>

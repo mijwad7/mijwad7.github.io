@@ -27,7 +27,7 @@ const COMMANDS = {
     href: '#contact',
   },
   whoami: {
-    output: 'Muhammed Mijwad — Full Stack Developer based in Bahrain.',
+    output: 'Muhammed Mijwad — Full Stack & AI Developer based in Bahrain.',
   },
   help: {
     output: 'Available commands: journey, projects, stack, experience, contact, whoami, clear',
@@ -211,12 +211,12 @@ export default function Hero() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight text-white">
                 {isResume ? (
                   <>
-                    Full Stack <span className="gradient-text">Developer</span>
+                    Full Stack & <span className="gradient-text">AI Developer</span>
                   </>
                 ) : (
                   <>
-                    Building APIs, backends, and{' '}
-                    <span className="gradient-text">full-stack products</span> that hold together.
+                    Building APIs, full-stack products, and{' '}
+                    <span className="gradient-text">AI workflows</span> that hold together.
                   </>
                 )}
               </h1>
@@ -229,7 +229,7 @@ export default function Hero() {
               transition={{ delay: 0.35 }}
               className="text-white/50 text-base sm:text-lg leading-relaxed max-w-xl"
             >
-              I'm a full-stack developer working across Django, React, PostgreSQL, Redis, REST APIs, authentication, and real-time systems.
+              I work across the stack, from Django, React, and PostgreSQL to REST APIs, and I use AI where it makes the product more useful.
             </motion.p>
 
             {/* Supporting line */}
@@ -336,7 +336,7 @@ export default function Hero() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-accent-cyan mt-1">▹</span>
-                  <span><strong>Data & Real-time:</strong> Implementing WebSocket connections, background tasks (Celery), and complex data pipelines.</span>
+                  <span><strong>AI Workflows:</strong> Using LLM APIs inside product features, together with the backend and frontend around them.</span>
                 </li>
               </ul>
             </motion.div>
